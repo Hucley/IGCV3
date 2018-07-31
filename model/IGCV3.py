@@ -4,7 +4,7 @@ IGCV3.
 
 As described in https://arxiv.org/abs/1804.06202v1
 
-  IGCV2: Interleaved Structured Sparse Convolutional Neural Networks
+   IGCV3:Interleaved Low-Rank Group Convolutions for Efficient Deep Neural Networks
   
 
 """
