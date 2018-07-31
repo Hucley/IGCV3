@@ -2,7 +2,7 @@
 """
 IGCV3.
 
-As described in https://arxiv.org/abs/1804.06202v1
+As described in https://arxiv.org/pdf/1806.00178.pdf
 
    IGCV3:Interleaved Low-Rank Group Convolutions for Efficient Deep Neural Networks
   
