@@ -179,17 +179,18 @@ def IGCV_arg_scope(weight_decay=0.0005,use_batch_norm=True):
     else:
         normalizer_fn = None
         normalizer_params = {}
-    #weights_initializer = tf.truncated_normal_initializer(stddev=0.02)
-    weights_initializer = slim.xavier_initializer_conv2d()
-    regularizer = tf.contrib.layers.l2_regularizer(weight_decay)
-    depthwise_regularizer = None
-    with slim.arg_scope([slim.conv2d, slim.separable_conv2d, slim.fully_connected], weights_initializer=weights_initializer):
+    weights_initializer = tf.truncated_normal_initializer(stddev=0.02)
+    #weights_initializer = slim.xavier_initializer_conv2d()
+    regularizer = slim.l2_regularizer(weight_decay)
+    with slim.arg_scope([slim.conv2d, slim.separable_conv2d, slim.fully_connected], 
+                        weights_initializer=weights_initializer,
+                        weights_regularizer=regularizer,
+                        biases_regularizer=regularizer):
         with slim.arg_scope([slim.conv2d, slim.separable_conv2d], 
+                        activation_fn=tf.nn.relu6,
                         normalizer_fn=normalizer_fn,
                         normalizer_params=normalizer_params,
-                        biases_initializer=None):
-            with slim.arg_scope([slim.conv2d, slim.fully_connected], weights_regularizer=regularizer):
-                with slim.arg_scope([slim.separable_conv2d], weights_regularizer=depthwise_regularizer)as sc:
+                        biases_initializer=None) as sc:
                     return sc
                     
 def inference(inputs,
